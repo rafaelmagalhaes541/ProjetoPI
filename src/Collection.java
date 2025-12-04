@@ -115,6 +115,7 @@ public class Collection {
      */
     public ArrayList<Item> getItems() {
         return items;
+
     }
     /**
      * Obtém o limite máximo de quantidade de itens da coleção.

@@ -78,9 +78,9 @@ public class CollectionManager {
                 case 3 -> {
                     ArrayList<String> lista = colecao.listarPorTitulo();
                     if (lista.isEmpty()) {
-                        System.out.println("📭 Nenhum item na coleção.");
+                        System.out.println("Nenhum item na coleção.");
                     } else {
-                        System.out.println("📚 Itens ordenados por título:");
+                        System.out.println("Itens ordenados por título:");
                         for (String t : lista) {
                             System.out.println(" - " + t);
                         }
