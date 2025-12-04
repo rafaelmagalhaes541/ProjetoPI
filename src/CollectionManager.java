@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class CollectionManager {
 
     /**
-     * Método principal que apresenta o menu e interage com o utilizador.
+     * Metodo principal que apresenta o menu e interage com o utilizador.
      *
      * @param args Argumentos da linha de comandos (não utilizados).
      */
@@ -88,8 +88,18 @@ public class CollectionManager {
                 }
 
                 case 4 -> {
-                    System.out.println("Total de itens na coleção: " + colecao.calcularTotalItens());
-                }
+                    int totalItens = colecao.calcularTotalItens();
+                    System.out.println("Total de itens na coleção: " + totalItens);
+
+                    ArrayList<Item> items = colecao.getItems();
+                    if (items.isEmpty()) {
+                        System.out.println("Nenhum item na coleção.");
+                    } else {
+                        System.out.println("Detalhes dos itens:");
+                        for (Item i : items) {
+                            System.out.println(" - " + i.getTitulo() + ": " + i.getQuantidade() + " unidades");
+                        }
+                    }                }
 
                 case 0 -> System.out.println("A sair...");
                 default -> System.out.println("Opção inválida!");
@@ -99,5 +109,9 @@ public class CollectionManager {
 
         sc.close();
     }
+    // Adiconar item
+    // Apagar item da coleção
+    // Listar item na coleção por titulo
+    // Apagar item
 }
 

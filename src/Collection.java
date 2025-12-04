@@ -43,21 +43,23 @@ public class Collection {
      */
 
     boolean apagarItem(Item item) {
-        for (Item item1 : items) {
+        for (int i = 0; i < items.size(); i++) {
+            Item item1 = items.get(i);
             if (item1.getTitulo().equalsIgnoreCase(item.getTitulo())) {
                 if (item.getQuantidade() > item1.getQuantidade()) {
-                    return false;
+                    return false; // não pode remover mais do que existe
                 }
                 if (item.getQuantidade() == item1.getQuantidade()) {
-                    items.remove(item);
+                    items.remove(i); // remove corretamente o item existente
                 } else {
                     item1.reduzirQuantidade(item.getQuantidade());
                 }
                 return true;
             }
         }
-        return false;
+        return false; // item não encontrado
     }
+
 
     /**
      * Adiciona um item à coleção, caso haja espaço disponível.
@@ -125,4 +127,5 @@ public class Collection {
     public int getQuantidadeLimite() {
         return quantidadeLimite;
     }
+
 }
