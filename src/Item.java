@@ -1,7 +1,18 @@
+/**
+ * Representa um item dentro de uma coleção, contendo título, quantidade e data de compra.
+ */
 public class Item {
     private String titulo;
     private int quantidade;
     private String dataDeCompra;
+
+    /**
+     * Construtor da classe Item.
+     *
+     * @param titulo        Título do item.
+     * @param quantidade    Quantidade do item.
+     * @param dataDeCompra  Data de compra no formato dd/mm/aaaa.
+     */
 
     public Item(String titulo, int quantidade, String dataDeCompra) {
         this.titulo = titulo;
@@ -9,16 +20,31 @@ public class Item {
         this.dataDeCompra = dataDeCompra;
     }
 
+    /**
+     * Aumenta a quantidade do item.
+     *
+     * @param quantidade Quantidade a adicionar.
+     */
     void aumentarQuantidade(int quantidade) {
         this.quantidade += quantidade;
     }
 
+    /**
+     * Reduz a quantidade do item, se possível.
+     *
+     * @param quantidade Quantidade a remover.
+     */
     void reduzirQuantidade(int quantidade) {
         if ((this.quantidade - quantidade) >= 0) {
             this.quantidade -= quantidade; // corrigido
         }
     }
 
+    /**
+     * Verifica se a data de compra é válida.
+     *
+     * @return true se a data for válida, false caso contrário.
+     */
     boolean dataValida() {
         String[] partes = dataDeCompra.split("/");
 
@@ -52,10 +78,20 @@ public class Item {
         }
     }
 
+    /**
+     * Obtém o título do item.
+     *
+     * @return Título do item.
+     */
     public String getTitulo() {
         return titulo;
     }
 
+    /**
+     * Obtém a quantidade do item.
+     *
+     * @return Quantidade do item.
+     */
     public int getQuantidade() {
         return quantidade;
     }

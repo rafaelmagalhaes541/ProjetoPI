@@ -1,8 +1,16 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ * Classe principal que gere a execução do programa de gestão de coleções.
+ * Permite ao utilizador criar uma coleção, adicionar, remover e listar itens.
+ */
 public class CollectionManager {
 
+    /**
+     * Método principal que apresenta o menu e interage com o utilizador.
+     *
+     * @param args Argumentos da linha de comandos (não utilizados).
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
