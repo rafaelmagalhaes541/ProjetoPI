@@ -15,7 +15,7 @@ public class Item {
 
     void reduzirQuantidade(int quantidade) {
         if ((this.quantidade - quantidade) >= 0) {
-            this.quantidade += quantidade;
+            this.quantidade -= quantidade; // corrigido
         }
     }
 
