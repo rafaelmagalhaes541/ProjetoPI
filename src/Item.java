@@ -95,4 +95,13 @@ public class Item {
     public int getQuantidade() {
         return quantidade;
     }
+
+    /**
+     * Obtém a data de compra do item.
+     *
+     * @return data de compra do item.
+     */
+    public String getDataDeCompra() {
+        return dataDeCompra;
+    }
 }

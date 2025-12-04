@@ -1,27 +1,53 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-/**
- * Classe principal que gere a execução do programa de gestão de coleções.
- * Permite ao utilizador criar uma coleção, adicionar, remover e listar itens.
- */
+
 public class CollectionManager {
 
-    /**
-     * Metodo principal que apresenta o menu e interage com o utilizador.
-     *
-     * @param args Argumentos da linha de comandos (não utilizados).
-     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Collection colecao;
+        ArrayList<Item> itensExistentes = new ArrayList<>();
+        String caminhoCSV = "";
 
-        System.out.print("Nome da coleção: ");
-        String nomeColecao = sc.nextLine();
-        System.out.print("Quantidade limite da coleção: ");
-        int limite = sc.nextInt();
-        sc.nextLine(); // consumir quebra de linha
+        System.out.print("Já tens uma caderneta existente? (s/n): ");
+        String resposta = sc.nextLine().trim().toLowerCase();
 
-        Collection colecao = new Collection(nomeColecao, limite);
+        if (resposta.equals("s")) {
+            // Pedir nome do ficheiro
+            System.out.print("Indica o nome do ficheiro CSV (ex: caderneta.csv): ");
+            caminhoCSV = sc.nextLine().trim();
 
+            // Tenta ler os itens existentes
+            itensExistentes = CollectionWrite.lerDeCSV(caminhoCSV);
+
+            // Perguntar o nome da coleção e limite
+            System.out.print("Nome da coleção: ");
+            String nomeColecao = sc.nextLine();
+
+            System.out.print("Quantidade limite da coleção: ");
+            int limite = sc.nextInt();
+            sc.nextLine();
+
+            colecao = new Collection(nomeColecao, limite);
+
+            // Adiciona os itens carregados
+            for (Item i : itensExistentes) {
+                colecao.adiconarItem(i);
+            }
+
+        } else {
+            // Criar coleção nova
+            System.out.print("Nome da coleção: ");
+            String nomeColecao = sc.nextLine();
+
+            System.out.print("Quantidade limite da coleção: ");
+            int limite = sc.nextInt();
+            sc.nextLine();
+
+            colecao = new Collection(nomeColecao, limite);
+        }
+
+        // Menu principal
         int opcao;
         do {
             System.out.println("\n=== MENU COLEÇÃO: " + colecao.getNomeColecao() + " ===");
@@ -29,6 +55,7 @@ public class CollectionManager {
             System.out.println("2. Apagar item");
             System.out.println("3. Listar itens por título");
             System.out.println("4. Mostrar total de itens");
+            System.out.println("5. Gravar coleção no ficheiro CSV");
             System.out.println("0. Sair");
             System.out.print("Escolha: ");
 
@@ -99,7 +126,16 @@ public class CollectionManager {
                         for (Item i : items) {
                             System.out.println(" - " + i.getTitulo() + ": " + i.getQuantidade() + " unidades");
                         }
-                    }                }
+                    }
+                }
+
+                case 5 -> {
+                    if (caminhoCSV.isEmpty()) {
+                        System.out.print("Indica o nome do ficheiro CSV para gravar: ");
+                        caminhoCSV = sc.nextLine();
+                    }
+                    CollectionWrite.gravarParaCSV(caminhoCSV, colecao.getItems());
+                }
 
                 case 0 -> System.out.println("A sair...");
                 default -> System.out.println("Opção inválida!");
@@ -107,11 +143,11 @@ public class CollectionManager {
 
         } while (opcao != 0);
 
+        // Grava automaticamente ao sair, se tiver nome de ficheiro definido
+        if (!caminhoCSV.isEmpty()) {
+            CollectionWrite.gravarParaCSV(caminhoCSV, colecao.getItems());
+        }
+
         sc.close();
     }
-    // Adiconar item
-    // Apagar item da coleção
-    // Listar item na coleção por titulo
-    // Apagar item
 }
-
