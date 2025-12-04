@@ -1,8 +1,20 @@
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Classe utilitária para ler e gravar coleções de {@link Item} em ficheiros CSV.
+ * Permite carregar uma coleção existente de um ficheiro e gravar a coleção atual em CSV.
+ */
 public class CollectionWrite {
-    // Ler coleção de CSV e retornar lista de Items
+
+    /**
+     * Lê uma coleção de itens a partir de um ficheiro CSV.
+     * Cada linha do ficheiro deve ter o formato: "titulo,quantidade,data".
+     *
+     * @param caminhoFicheiro O caminho do ficheiro CSV a ler.
+     * @return Uma {@link ArrayList} de {@link Item} representando a coleção carregada.
+     *         Retorna uma lista vazia se o ficheiro não existir ou não houver itens válidos.
+     */
     public static ArrayList<Item> lerDeCSV(String caminhoFicheiro) {
         ArrayList<Item> itens = new ArrayList<>();
 
@@ -37,7 +49,14 @@ public class CollectionWrite {
         return itens;
     }
 
-    // Gravar coleção para CSV
+    /**
+     * Grava uma coleção de itens num ficheiro CSV.
+     * Cada item é gravado numa linha com o formato: "titulo,quantidade,data".
+     * Se o ficheiro já existir, será sobrescrito.
+     *
+     * @param caminhoFicheiro O caminho do ficheiro CSV onde a coleção será gravada.
+     * @param items A lista de {@link Item} a gravar no ficheiro.
+     */
     public static void gravarParaCSV(String caminhoFicheiro, ArrayList<Item> items) {
         try (PrintWriter pw = new PrintWriter(new FileWriter(caminhoFicheiro))) {
             for (Item item : items) {
